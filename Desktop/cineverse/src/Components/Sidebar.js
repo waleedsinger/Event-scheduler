@@ -33,27 +33,6 @@ const Sidebar = () => {
           Browse TV Shows
         </button>
       </div>
-      <div className="text-gray-500 text-xs mt-8 space-y-1">
-        <a href="#" className="block hover:text-white">Legal</a>
-        <a href="#" className="block hover:text-white">Safety & Privacy Center</a>
-        <a href="#" className="block hover:text-white">Privacy Policy</a>
-        <a href="#" className="block hover:text-white">Cookies</a>
-        <a href="#" className="block hover:text-white">About Ads</a>
-        <a href="#" className="block hover:text-white">Accessibility</a>
-        <a href="#" className="block hover:text-white">Notice at Collection</a>
-      </div>
-
-      {/* Language Buttons */}
-      <div className="mt-8">
-        <button className="flex items-center space-x-2 text-white bg-gray-800 p-2 rounded-lg hover:bg-gray-700">
-          <span>English</span>
-        </button>
-      </div>
-      <div className="mt-8">
-        <button className="flex items-center space-x-2 text-white bg-gray-800 p-2 rounded-lg hover:bg-gray-700">
-          <span>Deutsch</span>
-        </button>
-      </div>
     </div>
   );
 };
