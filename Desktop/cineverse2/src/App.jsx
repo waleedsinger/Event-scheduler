@@ -1,17 +1,33 @@
 // src/App.jsx
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import  { useState } from 'react';
 import Home from './pages/Home';
 import Journal from './pages/Journal';
 
 const App = () => {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const navigateTo = (page) => {
+    setCurrentPage(page);
+  };
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Home />;
+      case 'journal':
+        return <Journal />;
+   
+    }
+  };
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/journal" element={<Journal />} />
-      </Routes>
-    </Router>
+    <div>
+      <nav>
+        <button onClick={() => navigateTo('home')}>Home</button>
+        <button onClick={() => navigateTo('journal')}>Journal</button>
+      </nav>
+      {renderPage()}
+    </div>
   );
 };
 
