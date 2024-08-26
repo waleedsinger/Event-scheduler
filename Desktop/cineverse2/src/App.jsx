@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Journal from './pages/Journal';
-import Header from './components/Header';
+
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -53,7 +53,7 @@ const App = () => {
 
   return (
     <div className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'} min-h-screen`}>
-      <Header title="My Application" />
+      
       <nav className="p-4 bg-gray-800 flex justify-center">
         <button
           onClick={() => navigateTo('home')}
