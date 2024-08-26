@@ -1,29 +1,42 @@
 // src/components/Header.jsx
-import PropTypes from 'prop-types';
+import  { useState } from 'react';
 
-const Header = ({ onToggleDarkMode }) => {
-  // component code here
+// import PropTypes from 'prop-types';
+
+const Header = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    onSearch(value);
+  };
+
+  const handleToggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark', !isDarkMode);
+  };
+
   return (
-    <header className="p-4 bg-gray-800 flex justify-between items-center">
-      <div className="search-bar relative">
+    <header className={`p-4 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-800'} flex justify-between items-center`}>
+      <div className="search-bar relative w-1/2">
         <input
           type="text"
           placeholder="Search Movies..."
+          value={searchTerm}
+          onChange={handleSearchChange}
           className="w-full px-5 py-2 rounded-lg bg-white text-black outline-none"
         />
       </div>
       <button
-        onClick={onToggleDarkMode}
-        className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200"
+        onClick={handleToggleDarkMode}
+        className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-white"
       >
         Toggle Dark Mode
       </button>
     </header>
   );
-};
-
-Header.propTypes = {
-  onToggleDarkMode: PropTypes.func.isRequired,
 };
 
 export default Header;
