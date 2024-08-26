@@ -1,7 +1,8 @@
 // src/components/Header.jsx
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const Header = ({ onToggleDarkMode }) => {
+  // component code here
   return (
     <header className="p-4 bg-gray-800 flex justify-between items-center">
       <div className="search-bar relative">
@@ -19,6 +20,10 @@ const Header = ({ onToggleDarkMode }) => {
       </button>
     </header>
   );
+};
+
+Header.propTypes = {
+  onToggleDarkMode: PropTypes.func.isRequired,
 };
 
 export default Header;
