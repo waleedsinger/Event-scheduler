@@ -14,19 +14,65 @@ const Sidebar = () => {
         <img src="logo.png" alt="Logo" className="h-50" />
       </div>
       <div className="space-y-4">
-        <button onClick={() => handleTranslate("de")} className="text-white">
-          Deutsch
-        </button>
-        <button onClick={() => handleTranslate("en")} className="text-white">
-          English
+        <a href="/journal" className="flex items-center space-x-2 hover:text-gray-400">
+          <svg
+            className="w-6 h-6"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M21 5h-14c-1.104 0-2 .896-2 2v1h-3v12h3v1c0 1.104.896 2 2 2h14c1.104 0 2-.896 2-2v-14c0-1.104-.896-2-2-2zm-9 14h-4v-10h4v10zm6-7h-4v10h4v-10z"></path>
+          </svg>
+          <span>{translations[language].movieNotes}</span>
+        </a>
+      </div>
+      <div className="bg-gray-800 p-4 rounded-lg mb-4">
+        <h3 className="text-lg font-semibold mb-2">{translations[language].createWatchlist}</h3>
+        <p className="text-sm text-gray-400 mb-4">{translations[language].helpCreateWatchlist}</p>
+        <button className="w-full bg-white text-black font-bold py-2 rounded-lg hover:bg-gray-200">
+          {translations[language].createWatchlistButton}
         </button>
       </div>
-      <div>
-        <p>{translations[language].movieNotes}</p>
-        <p>{translations[language].home}</p>
-        <p>{translations[language].popularMovies}</p>
-        <p>{translations[language].journal}</p>
-        {/* Add more translated elements here */}
+      <div className="bg-gray-800 p-4 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2">{translations[language].findTVShows}</h3>
+        <p className="text-sm text-gray-400 mb-4">{translations[language].updateShows}</p>
+        <button className="w-full bg-white text-black font-bold py-2 rounded-lg hover:bg-gray-200">
+          {translations[language].browseTVShows}
+        </button>
+      </div>
+      <div className="text-gray-500 text-xs mt-8 space-y-1">
+        <button className="block hover:text-white" onClick={() => {}}>
+          {translations[language].legal}
+        </button>
+        <button className="block hover:text-white" onClick={() => {}}>
+          {translations[language].safetyPrivacy}
+        </button>
+        <button className="block hover:text-white" onClick={() => {}}>
+          {translations[language].privacyPolicy}
+        </button>
+        <button className="block hover:text-white" onClick={() => {}}>
+          {translations[language].cookies}
+        </button>
+        <button className="block hover:text-white" onClick={() => {}}>
+          {translations[language].aboutAds}
+        </button>
+        <button className="block hover:text-white" onClick={() => {}}>
+          {translations[language].accessibility}
+        </button>
+        <button className="block hover:text-white" onClick={() => {}}>
+          {translations[language].noticeAtCollection}
+        </button>
+      </div>
+      {/* Language Buttons */}
+      <div className="mt-8">
+        <button onClick={() => handleTranslate("en")} className="flex items-center space-x-2 text-white bg-gray-800 p-2 rounded-lg hover:bg-gray-700">
+          <span>English</span>
+        </button>
+      </div>
+      <div className="mt-8">
+        <button onClick={() => handleTranslate("de")} className="flex items-center space-x-2 text-white bg-gray-800 p-2 rounded-lg hover:bg-gray-700">
+          <span>Deutsch</span>
+        </button>
       </div>
     </div>
   );
