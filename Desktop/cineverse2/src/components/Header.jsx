@@ -1,24 +1,26 @@
-// src/components/Header.jsx
-import React from 'react';
+import PropTypes from 'prop-types';
 
-const Header = ({ onToggleDarkMode }) => {
+const Header = ({ title, searchTerm, onSearchChange }) => {
   return (
     <header className="p-4 bg-gray-800 flex justify-between items-center">
-      <div className="search-bar relative">
+      <h1 className="text-white text-xl">{title}</h1>
+      <div className="search-bar relative w-1/2">
         <input
           type="text"
-          placeholder="Search Movies..."
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => onSearchChange(e.target.value)}
           className="w-full px-5 py-2 rounded-lg bg-white text-black outline-none"
         />
       </div>
-      <button
-        onClick={onToggleDarkMode}
-        className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200"
-      >
-        Toggle Dark Mode
-      </button>
     </header>
   );
+};
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  searchTerm: PropTypes.string.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
 };
 
 export default Header;

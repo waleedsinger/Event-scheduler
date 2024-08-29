@@ -1,4 +1,3 @@
-// src/components/Sidebar.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ const Sidebar = () => {
     return (
         <div className="w-64 h-screen bg-gray-800 flex flex-col p-4">
           <div className="mb-8">
-            <img src="logo.png" alt="Logo" className="h-50"  />
+            <img src={("./Logo.png")} />
           </div>
           <div className="space-y-4">
             <a href="/journal" className="flex items-center space-x-2 hover:text-gray-400">
