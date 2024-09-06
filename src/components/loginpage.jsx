@@ -11,13 +11,24 @@ function LoginPage({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const correctEmail = 'user@example.com';
-    const correctPassword = 'password123';
+    // Get the list of users from localStorage
+    const userList = JSON.parse(localStorage.getItem('users'));
 
-    if (email === correctEmail && password === correctPassword) {
+    // Find the user with matching email and password
+    const user = userList.find((user) => user.email === email && user.password === password);
+
+    if (user) {
       setError('');
       onLogin();
       navigate('/');
+      localStorage.setItem('isLoggedIn', true); // Store login status in localStorage
+      localStorage.setItem('loggedInUser', JSON.stringify(user)); // Store logged in user in localStorage
+
+      // Get the list of entries from localStorage for the logged in user
+      const entriesList = JSON.parse(localStorage.getItem(user.email));
+
+      // Display the entries list
+      console.log(entriesList); // Replace this with your desired logic to display the entries list
     } else {
       setError('Invalid email or password');
     }
