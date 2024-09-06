@@ -14,6 +14,23 @@ function SignUpPage() {
       setError('Passwords do not match');
       return;
     }
+    // Get existing users from local storage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    // Check if email already exists
+    const userExists = existingUsers.some((user) => user.email === email);
+    if (userExists) {
+      setError('Email already exists');
+      return;
+    }
+    // Create new user object
+    const newUser = {
+      email,
+      password,
+    };
+    // Add new user to existing users
+    existingUsers.push(newUser);
+    // Store updated users in local storage
+    localStorage.setItem('users', JSON.stringify(existingUsers));
     // Handle sign up logic here (e.g., API call)
     navigate('/'); // Redirect to homepage after successful sign up
   };
