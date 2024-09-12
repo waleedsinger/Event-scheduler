@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import LoginPage from './components/loginpage'; 
 import SignUpPage from './components/signuppage';
 import ForgotPasswordPage from './components/ForgotPasswordpage';
+import Chatbot from './components/Chatbot'; // Import the Chatbot component
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,6 +33,7 @@ function App() {
           element={<ForgotPasswordPage />}
         />
       </Routes>
+      <Chatbot /> {/* Include the Chatbot component */}
     </Router>
   );
 }
