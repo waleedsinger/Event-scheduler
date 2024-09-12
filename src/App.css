@@ -1,3 +1,4 @@
+/* Existing styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +40,54 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* New styles for the chatbot */
+
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000; /* Make sure it's on top of other content */
+}
+
+.chatbot-icon img {
+  width: 60px; /* Adjust size as needed */
+  height: 60px; /* Adjust size as needed */
+  border-radius: 50%; /* Make the icon circular */
+}
+
+.chatbot-popup {
+  position: fixed;
+  bottom: 90px; /* Adjust according to the chatbot icon */
+  right: 20px;
+  width: 300px;
+  height: 400px; /* Adjust according to your design */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it's on top of other content */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.chatbot-popup-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.chatbot-popup-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chatbot-popup-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
 }

@@ -1,0 +1,18 @@
+/* ChatbotIcon.css */
+
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.chatbot-icon:hover {
+  transform: scale(1.2); /* Increased scaling effect */
+}
+
+.chatbot-icon img {
+  width: 60px; /* Increased size */
+  height: 60px; /* Increased size */
+}
