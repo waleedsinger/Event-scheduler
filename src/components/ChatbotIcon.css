@@ -1,18 +1,25 @@
 /* ChatbotIcon.css */
 
+/* Container for the chatbot icon */
 .chatbot-icon {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-  transition: transform 0.3s;
+  bottom: 20px; /* Distance from the bottom of the viewport */
+  right: 20px;  /* Distance from the right of the viewport */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for scaling */
+  z-index: 1000; /* Ensure it is on top of other elements */
 }
 
+/* Hover effect for the chatbot icon */
 .chatbot-icon:hover {
-  transform: scale(1.2); /* Increased scaling effect */
+  transform: scale(1.1); /* Slight scaling effect on hover */
 }
 
+/* Styles for the image inside the chatbot icon container */
 .chatbot-icon img {
-  width: 60px; /* Increased size */
-  height: 60px; /* Increased size */
+  width: 60px; /* Fixed width of the icon */
+  height: 60px; /* Fixed height of the icon */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the container without distortion */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional shadow for better visibility */
 }

@@ -1,46 +1,43 @@
+// src/components/Header.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-function Header({ onAddEntryClick, onLogoutClick }) {
+function Header({ onAddEventClick, onLogoutClick }) {
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    // Save the entries list for this user before logging out
-    // You can use localStorage or any other method to store the data
-    // Example using localStorage:
-    // Replace with your actual entries list
-    const entries = JSON.parse(localStorage.getItem('entries'));
+    // Perform any necessary cleanup before logging out
+    if (onLogoutClick) onLogoutClick(); // Check if onLogoutClick is defined
 
-    // Call the provided onLogoutClick function
-    onLogoutClick();
-
-    // Navigate to '/'
-    navigate('/');
+    // Navigate to the home or login page after logging out
+    navigate('/login');
   };
 
   return (
-    <header className="flex-wrap justify-center items-center mb-6">
-      <h1 className="text-3xl font-extrabold text-white">My Diary</h1><br/>
-      <button
-        className="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-        onClick={onAddEntryClick}
-      >
-        Add Entry
-      </button>
-      <button
-        className="bg-red-500 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition-colors ml-4"
-        onClick={handleLogoutClick}
-      >
-        Logout
-      </button>
+    <header className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md">
+      <h1 className="text-2xl font-bold">Event Scheduler</h1>
+      <div className="flex items-center">
+        <button
+          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2 transition-colors"
+          onClick={onAddEventClick}
+        >
+          Add Event
+        </button>
+        <button
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors"
+          onClick={handleLogoutClick}
+        >
+          Logout
+        </button>
+      </div>
     </header>
   );
 }
 
 Header.propTypes = {
-  onAddEntryClick: PropTypes.func.isRequired,
-  onLogoutClick: PropTypes.func.isRequired,
+  onAddEventClick: PropTypes.func.isRequired,
+  onLogoutClick: PropTypes.func, // Make it optional
 };
 
 export default Header;

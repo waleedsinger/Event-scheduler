@@ -61,7 +61,7 @@ const Chatbot = () => {
   };
 
   const toggleChatbot = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(prevIsOpen => !prevIsOpen);
     if (!isOpen) {
       setInitialMessageDisplayed(false); // Reset initial message when opening
     }

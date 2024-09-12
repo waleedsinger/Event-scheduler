@@ -1,48 +1,56 @@
-import { useState, useEffect } from 'react';
-import Header from './Header';
-import EntryList from './EntryList';
-import AddEntryModal from './AddEntryModal';
+// src/components/HomePage.jsx
+import { useEffect, useState } from "react";
+import Header from "./Header";
+import EventList from "./EventList";
+import CreateEventPage from './CreateEventPage';
+import EventDetailsPage from './EventDetailsPage';
 
 function HomePage() {
-  const [entries, setEntries] = useState([]);
+  const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
-    const storedEntries = localStorage.getItem('entries');
-    if (storedEntries) {
-      setEntries(JSON.parse(storedEntries));
-    }
+    fetch("/api/events")
+      .then((response) => response.json())
+      .then((data) => setEvents(data));
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('entries', JSON.stringify(entries));
-  }, [entries]);
-
-  const handleAddEntryClick = () => setIsModalOpen(true);
+  const handleAddEventClick = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-  const handleSaveEntry = (entry) => {
-    const updatedEntries = [...entries, entry];
-    setEntries(updatedEntries);
+  const handleSaveEvent = (event) => {
+    setEvents([...events, event]);
     setIsModalOpen(false);
   };
 
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+  };
+
+  const handleCloseEventDetails = () => {
+    setSelectedEvent(null);
+  };
+
+  const handleLogoutClick = () => {
+    // Perform any logout operations here, e.g., clearing tokens
+    console.log("Logging out");
+    // You might want to handle actual logout logic or redirect
+  };
+
   return (
-    <div className="min-h-screen p-4 bg-gradient-to-b from-red-400 to-gray-700">
-      <div className="flex justify-center mb-6">
-        <img src="pe.png" alt="Login Illustration" className="h-100% w-100% sm:h-40 sm:w-40 lg:w-60 lg:h-60" />
-      </div>
-      <div className="flex justify-center mb-6">
-        <Header onAddEntryClick={handleAddEntryClick} />
-      </div>
-      <EntryList entries={entries} />
-      <AddEntryModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSave={handleSaveEntry}
-        entries={entries}
+    <div className="min-h-screen bg-gradient-to-b from-blue-400 to-gray-700">
+      <Header 
+        onAddEventClick={handleAddEventClick} 
+        onLogoutClick={handleLogoutClick} 
       />
+      <div className="container mx-auto p-4">
+        <EventList events={events} onEventClick={handleEventClick} />
+      </div>
+      <CreateEventPage isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleSaveEvent} />
+      <EventDetailsPage event={selectedEvent} onClose={handleCloseEventDetails} />
     </div>
   );
 }
 
 export default HomePage;
+

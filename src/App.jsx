@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import LoginPage from './components/loginpage'; 
-import SignUpPage from './components/signuppage';
-import ForgotPasswordPage from './components/ForgotPasswordpage';
-import Chatbot from './components/Chatbot'; // Import the Chatbot component
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import LoginPage from "./components/LoginPage";
+import SignUpPage from "./components/SignUpPage";
+import CreateEventPage from "./components/CreateEventPage";
+import EventDetailsPage from "./components/EventDetailsPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Chatbot from "./components/Chatbot"; // Import the Chatbot component
+import "./App.css"; // Import the App.css
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,24 +19,20 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/event/:id" element={<EventDetailsPage />} />
         <Route
-          path="/"
-          element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/login"
-          element={<LoginPage onLogin={handleLogin} />}
-        />
-        <Route
-          path="/signup"
-          element={<SignUpPage />}
-        />
-        <Route
-          path="/forgot-password"
-          element={<ForgotPasswordPage />}
+          path="/create-event"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <CreateEventPage />
+            </ProtectedRoute>
+          }
         />
       </Routes>
-      <Chatbot /> {/* Include the Chatbot component */}
+      <Chatbot /> {/* Ensure the Chatbot component is rendered */}
     </Router>
   );
 }

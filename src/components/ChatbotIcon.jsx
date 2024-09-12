@@ -1,10 +1,10 @@
 import React from 'react';
-import './ChatbotIcon.css'; // Styles for the icon
+import './ChatbotIcon.css'; // Ensure the path is correct
 
 const ChatbotIcon = ({ onClick }) => {
   return (
     <div className="chatbot-icon" onClick={onClick}>
-      <img src="/botIcon.png" alt="Chatbot" /> {/* Updated icon path */}
+      <img src="/botIcon.png" alt="Chatbot" /> {/* Ensure the path to the icon is correct */}
     </div>
   );
 };
