@@ -1,46 +1,30 @@
-import { useState, useEffect } from 'react';
-import Header from './Header';
-import EntryList from './EntryList';
-import AddEntryModal from './AddEntryModal';
+// src/components/HomePage.jsx
+import React, { useState, useEffect } from 'react';
+import { fetchEvents } from '/Users/sayanb3/Projects/Event-scheduler/api.js';
+
+import { Link } from 'react-router-dom';
 
 function HomePage() {
-  const [entries, setEntries] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    const storedEntries = localStorage.getItem('entries');
-    if (storedEntries) {
-      setEntries(JSON.parse(storedEntries));
-    }
+    fetchEvents()
+      .then(response => setEvents(response.data))
+      .catch(error => console.error('Error fetching events:', error));
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('entries', JSON.stringify(entries));
-  }, [entries]);
-
-  const handleAddEntryClick = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-  const handleSaveEntry = (entry) => {
-    const updatedEntries = [...entries, entry];
-    setEntries(updatedEntries);
-    setIsModalOpen(false);
-  };
-
   return (
-    <div className="min-h-screen p-4 bg-gradient-to-b from-red-400 to-gray-700">
-      <div className="flex justify-center mb-6">
-        <img src="pe.png" alt="Login Illustration" className="h-100% w-100% sm:h-40 sm:w-40 lg:w-60 lg:h-60" />
+    <div className="container mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Events</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {events.map(event => (
+          <div key={event.id} className="card">
+            <h2 className="text-xl">{event.name}</h2>
+            <p>{event.description}</p>
+            <Link to={`/event/${event.id}`} className="text-blue-500">View Details</Link>
+          </div>
+        ))}
       </div>
-      <div className="flex justify-center mb-6">
-        <Header onAddEntryClick={handleAddEntryClick} />
-      </div>
-      <EntryList entries={entries} />
-      <AddEntryModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSave={handleSaveEntry}
-        entries={entries}
-      />
     </div>
   );
 }
