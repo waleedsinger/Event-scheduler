@@ -1,6 +1,23 @@
+// src/api.js
+import axios from 'axios';
+
+const API_BASE_URL = 'http://localhost:3001/api';
+
+export const registerUser = (userData) => axios.post(`${API_BASE_URL}/users`, userData);
+
+
+// src/api.js
+export const createEvent = (eventData, token) => axios.post(`${API_BASE_URL}/events`, eventData, {
+headers: { Authorization: `Bearer ${token}` },
+});
+
+
+
+
+
 // src/components/CreateEventPage.jsx
 import React, { useState } from 'react';
-import { createEvent } from '/Users/sayanb3/Projects/Event-scheduler/api.js';
+//import { createEvent } from '/Users/sayanb3/Projects/Event-scheduler/api.js';
 import { useNavigate } from 'react-router-dom';
 
 function CreateEventPage() {
@@ -10,18 +27,21 @@ const [date, setDate] = useState('');
 const [error, setError] = useState('');
 const navigate = useNavigate();
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
 e.preventDefault();
-const token = localStorage.getItem('apiToken'); // Retrieve the API token from localStorage
+const token = localStorage.getItem('apiToken');
 
 if (!token) {
     setError('You must be logged in to create an event.');
     return;
 }
 
-createEvent({ name, description, date }, token)
-    .then(() => navigate('/'))
-    .catch(error => setError('Error creating event'));
+try {
+    await createEvent({ name, description, date }, token);
+    navigate('/');
+} catch (err) {
+    setError('Error creating event');
+}
 };
 
 return (

@@ -1,7 +1,23 @@
+
+
+// src/api.js
+import axios from 'axios';
+
+const API_BASE_URL = 'http://localhost:3001/api';
+
+export const registerUser = (userData) => axios.post(`${API_BASE_URL}/users`, userData);
+
+
+// src/api.js
+//export const loginUser = (credentials) => axios.post(`${API_BASE_URL}/auth/login`, credentials);
+
+
+
 // src/components/LoginPage.jsx
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '/Users/sayanb3/Projects/Event-scheduler/api.js';
 
 function LoginPage({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -9,20 +25,16 @@ function LoginPage({ onLogin }) {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const userList = JSON.parse(localStorage.getItem('users')) || [];
-    const user = userList.find((user) => user.email === email && user.password === password);
-
-    if (user) {
-      setError('');
-      onLogin();
+    try {
+      const response = await loginUser({ email, password });
+      const { token } = response.data;
+      localStorage.setItem('apiToken', token);
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('loggedInUser', JSON.stringify(user));
-      console.log('Login successful'); // Debugging line
+      onLogin();
       navigate('/create-event');
-    } else {
+    } catch (err) {
       setError('Invalid email or password');
     }
   };
